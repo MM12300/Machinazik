@@ -100,7 +100,7 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         $request->getSession()->getFlashBag()->add('success', 'Bonjour et bienvenue sur Machinazic');
         //$this->addFlash('success', 'Bonjour '.$this->getUser()->getUsername().', bienvenue sur Machinazic');
         return new RedirectResponse($this->urlGenerator->generate('home'));
-
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
     public function onLogicException(Request $request)
     {
@@ -108,6 +108,7 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         $request->getSession()->getFlashBag()->add('success', 'Merci de votre visite, en espérant bientôt vous revoir !');
         //$this->addFlash('success', 'Bonjour '.$this->getUser()->getUsername().', bienvenue sur Machinazic');
         return new RedirectResponse($this->urlGenerator->generate('home'));
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
 
