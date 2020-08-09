@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machinazik - sortie {{release.id}}
+{% endblock %}
+
+{% block body %}
+	<main class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 text-center">
+				<h1 class="titre_article">Machinazic présente :</h1>
+				<h2 id="who">
+					<span class="font-italic">{{release.releaseName}}</span>, la nouveauté de
+					<span class="font-weight-bold">{{ release.artist }}</span>
+				</h2>
+			</div>
+            <div class="col-xl-6"><img id="image_article" src="{{asset('assets/img/uploads/' ~ release.image) }}" alt="image associée à l'article" class="img-thumbnail rounded mx-auto d-block"></div>
+
+                <div class="col-xl-3 text-center align-self-center">
+                <div id="summary">
+					<p>
+						<span class="font-weight-bold"> Genre : </span>
+						{{ release.genre }}</p>
+					<p>
+						<span class="font-weight-bold">Sous-genre : </span>
+						{{ release.subgenre }}
+					</p>
+					<p>
+						<span class="font-weight-bold">Sortie le  : </span>
+						{{ release.dateRelease }}
+					</p>
+					<p>
+						<span class="font-weight-bold">Format : </span>
+						{{ release.releaseType }}
+					</p>
+                    </div>
+				</div>
+			<div class="col-12 col-xl-12 text-center mt-5">
+				<p class="justify-content-center"></p>
+				<p class="mb-4"><span  id="apropos">Découvrez <i class="fas fa-headphones-alt"></i>&nbsp;"{{release.artist}}"&nbsp;<i class="fas fa-headphones-alt"></i></span></p>
+				<p class="m-3 text-justify">
+										{{ release.description }}
+				</p>
+				<div id="keywords">
+					<p class="font-weight-bold"><i class="fas fa-hashtag"></i> Mots-clefs :</p>
+					<p>#Machinazic #Musique #Music #Musicpromo #New #Nouveau #Out #Release #{{release.releaseType}} #{{release.genre}} #{{release.subgenre}} #{{release.artist}} #Promo </p>
+				</div>
+
+				{# API #}
+				<div class="col-12 col-xl-12 text-center mt-5 no-view-mobile">
+					{% if release.youtube is not null %}
+						<iframe class="m-2" width="560" height="315" src="https://www.youtube.com/embed/{{release.youtube}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					{% endif %}	
+					{% if release.spotify is not null %}
+						<iframe class="m-2" src="https://open.spotify.com/embed/artist/{{release.spotify}}" width="650" height="380" frameborder="0" allowtransparency="true"></iframe>
+					{% endif %}	
+				</div>
+
+
+				{# SOCIAL #}
+				<div class="d-flex flex-row justify-content-center">
+					{% if release.facebook is not null %}
+						<div class="p-4">
+							<a href="https://www.facebook.com/{{release.facebook}}">
+								<img class="logo" src="{{ asset('assets/img/logos/facebook2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if release.instagram is not null %}
+						<div class="p-4">
+							<a href="https://www.instagram.com/{{release.instagram}}">
+								<img class="logo" src="{{ asset('assets/img/logos/instagram.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if release.twitter is not null %}
+						<div class="p-4">
+							<a href="https://www.twitter.com/{{release.twitter}}">
+								<img class="logo" src="{{ asset('assets/img/logos/twitter2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+				</div>
+
+				{# MUSIQUE #}
+				<div class="d-flex flex-row justify-content-center">
+					
+					{% if release.youtube is not null %}
+						<div class="p-4">
+							<a href="https://www.youtube.com/watch?v={{release.youtube}}">
+								<img class="logo" src="{{ asset('assets/img/logos/youtube1.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}	
+
+					{% if release.soundcloud is not null %}
+						<div class="p-4">
+							<a href="https://www.soundcloud.com/{{release.soundcloud}}">
+								<img class="logo" src="{{ asset('assets/img/logos/soundcloud2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}	
+				</div>
+				<div class="d-flex flex-row justify-content-center">
+					{% if release.deezer is not null %}
+						<div class="p-4">
+							<a href="https://www.deezer.com/fr/{{release.deezer}}">
+								<img class="logo" src="{{ asset('assets/img/logos/deezer2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if release.spotify is not null %}
+						<div class="p-4">
+							<a href="https://www.spotify.com/{{release.spotify}}">
+								<img class="logo" src="{{ asset('assets/img/logos/spotify2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}			
+				</div>
+				<div id="share">
+						<a href="https://www.facebook.com/share.php?u=https://www.discogs.com/"><i class="fab fa-facebook-square"></i>&nbsp;Partager sur Facebook</a>
+					</div>	
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-end" >
+			<p class="font-italic mt-3 pr-4">Article crée le
+				{{ release.dateCreated|date("m/d/Y") }}</p>
+		</div>
+
+	</main>
+{% endblock %}

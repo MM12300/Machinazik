@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre espace utilisateur
+{% endblock %}
+
+{% block body %}
+	<main id="userspace" class="container">
+		<div>
+			<h1 class="titre_article text-center">Votre espace utilisateur</h1>
+			<div class="d-flex flex-column justify-content-center my-4 px-2">
+			<div class="ml-2 mb-4">
+				<p>Depuis votre espace, vous pouvez administrer vos articles (création, suppresion, modification...)</p>
+			</div>
+			<div class="d-flex flex-row justify-content-around">
+				<a class="btn btn-rouge m-2" href="">Réinitialisez votre mot de passe</a>
+				<a class="btn btn-rouge m-2" href="">Supprimer votre compte et les articles associés</a>
+			</div>
+		</div>
+
+
+			<div class="row justify-content-center text-center align-center">
+				<div id="table" class="col-sd-12 col-xl-12">
+					<h3>Vos sorties <a class="btn-admin" href="{{ path('release_addRelease') }}"><i class="fas fa-plus-square"></i></a><span class="back_hiding small-font"></span></h3>
+					<table class="table table-dark">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th class="back_hiding">Date</th>
+								<th class="back_hiding" scope="col">Artiste</th>
+								<th class="back_hiding" scope="col">Type</th>
+								<th class="back_hiding" scope="col">Nom</th>
+								<th scope="col">Vos articles</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for release in releases %}
+								<tr>
+									<td>{{release.id}}</td>
+									<td class="back_hiding">{{release.dateCreated|date("d/m/Y")}}</td>
+									<td class="back_hiding">{{release.artist}}</td>
+									<td class="back_hiding">{{release.releaseType}}</td>
+									<td class="back_hiding">{{release.releaseName}}</td>
+									<td>
+										<a class="btn btn-warning d-inline-block my-3" href="{{ path('release_update', {release_id: release.id}) }}">Modifier</a>
+					
+										<a class="btn btn-danger d-inline-block my-3" href="{{ path('release_delete', {release_id: release.id}) }}">Supprimer</a>
+						
+										<a class="btn btn-info d-inline-block my-3" href="{{ path('release', {release_id: release.id}) }}">Voir</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row justify-content-center text-center align-center">
+				<div id="table" class="col-sd-12 col-xl-12">
+					<h3>Vos évènements <a class="btn-admin" href="{{ path('live_addLive') }}"><i class="fas fa-plus-square"></i></a><span class="back_hiding small-font"></span></h3>
+					<table class="table table-dark">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th class="back_hiding">Date</th>
+								<th class="back_hiding" scope="col">Artiste</th>
+								<th class="back_hiding" scope="col">Type</th>
+								<th class="back_hiding" scope="col">Nom</th>
+								<th scope="col">Vos articles</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for live in lives %}
+								<tr>
+									<td>{{live.id}}</td>
+									<td class="back_hiding">{{live.dateCreated|date("d/m/Y")}}</td>
+									<td class="back_hiding">{{live.artist}}</td>
+									<td class="back_hiding">{{live.liveType}}</td>
+									<td class="back_hiding">{{live.liveName}}</td>
+									<td>
+										<a class="btn btn-warning d-inline-block my-3" href="{{ path('live_update', {live_id: live.id}) }}">Modifier</a>
+					
+										<a class="btn btn-danger d-inline-block my-3" href="{{ path('live_delete', {live_id: live.id}) }}">Supprimer</a>
+						
+										<a class="btn btn-info d-inline-block my-3" href="{{ path('live', {live_id: live.id}) }}">Voir</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+	</main>
+{% endblock %}

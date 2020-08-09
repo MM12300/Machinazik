@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suppression de la sortie{{release.id}}{% endblock %}
+
+{% block body %}
+    <main class="container-fluid" id="delete">
+    {% for label, messages in app.flashes %}
+        <div class="alert text-center alert-{{ label }}">
+            {% for message in messages %}
+                {{ message|raw }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+        <div class="row text-center justify-content-center">
+            <div id="login_zone" class="col-12 col-xl-4 justify-content-center px-5 pb-5 pt-2 mt-5">
+                <a href="{{ path('home') }}" class="d-inline-block">
+                    <img src="{{ asset('assets/img/machinazic-logo.png') }}" alt="">
+                </a>
+                <h1>Suppression d'un article <span class="text-italic">"sortie"</span></h1>
+                <p class="delete_p">Article posté le <span class="font-weight-bold">{{release.dateCreated|date("d/m/Y")}}</span> - <span class="font-weight-bold">{{release.releaseName}}</span></p>
+                <form method="post">
+                    <a href="{{ path('user') }}">Annuler</a>
+                    <input type="hidden" name="action" value="delete">
+                    <button class="btn btn-rouge" type="submit">Oui, je veux supprimer cet article</button>                        
+                </form>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+

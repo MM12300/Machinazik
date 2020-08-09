@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription
+{% endblock %}
+
+
+{% block body %}
+
+	<main class="container-fluid" id="inscription">
+		{% for label, messages in app.flashes %}
+			<div class="alert text-center alert-{{ label }}">
+				{% for message in messages %}
+					{{ message|raw }}
+				{% endfor %}
+			</div>
+		{% endfor %}
+		<div class="row text-center justify-content-center">
+			<div id="login_zone" class="col-12 col-xl-4 justify-content-center px-5 pb-5 pt-2 mt-5">
+				<a href="{{ path('home') }}" class="d-inline-block">
+					<img src="{{ asset('assets/img/machinazic-logo.png') }}" alt="">
+				</a>
+				<h1>Inscription</h1>
+				<p class="connexion_p">Inscrivez-vous pour accéder à nos services</p>
+				<form method="post">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-user"></i>
+							</span>
+						</div>
+						<input type="text" id="nickname" placeholder="Prénom" name="nickname" class="form-control mr-2" value="{{ input_saisis.nickname ?? '' }}">
+						<input type="text" id="familyname" placeholder="Nom" name="familyname" class="form-control" value="{{ input_saisis.familyname ?? '' }}">
+					</div>
+
+					<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fas fa-fingerprint"></i>
+								</span>
+							</div>
+						<input type="text" id="pseudo" placeholder="Pseudo" name="pseudo" class="form-control" value="{{ input_saisis.pseudo ?? '' }}">
+					</div>
+
+					<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="far fa-envelope"></i>
+								</span>
+							</div>
+						<input type="text" id="email" name="email" placeholder="Email" class="form-control" value="{{ input_saisis.email ?? '' }}">
+					</div>
+
+					<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fa fa-unlock-alt"></i>
+								</span>
+							</div>
+						<input type="password" id="password" name="password" placeholder="Mot de passe" class="form-control" value="{{ input_saisis.password ?? '' }}">
+					</div>
+
+					<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">
+									<i class="fa fa-unlock-alt"></i>
+								</span>
+							</div>
+						<input type="password" id="passwordcheck" name="passwordcheck" placeholder="Validation du Mot de passe" class="form-control" value="{{ input_saisis.passwordcheck ?? '' }}">
+					</div>
+
+					{# <div class="g-recaptcha" data-sitekey="6Ld0g6UZAAAAACWJsnMdhjTNQW2yVlA8ew0awoqI"></div> #}
+				
+
+
+					<div class="input-group mb-3">
+						<label class="connexion_p form-check-label" for="materialUnchecked"><input type="checkbox" id="defaultChecked2" checked>
+								J'accepte les conditions d'utilisation générales</label>
+					</div>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class="btn" type="submit">Envoyer</button>
+
+					<hr>
+					<div class="text-center">
+						<p class="connexion_p">Merci pour votre confiance</p>
+						<a href="{{ path('home') }}"><img class="w-25" src="{{ asset('assets/img/thankyou.png') }}" alt="merci"></a>
+					</div>
+
+				</form>
+			</div>
+		</div>             						
+	</main>
+{% endblock %}
+
+{% block js %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+{% endblock %}

@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une sortie
+{% endblock %}
+
+{% block body %}
+	<main class="container">
+		<div class="row  justify-content-center">
+			<div class="col-10 text-center">
+				<a href="{{ path('app_login') }}" class="navbar-brand">
+					<img src="{{ asset('assets/img/') }}" alt="">
+				</a>
+				<h1 class="titre_form">Ajouter une sortie</h1>
+				<p>Indiquez tous les détails concernant la <span class="font-weight-bold">production musicale</span> que vous souhaitez promouvoir (nom d'artiste, date de la sortie...)</p>
+				<p class="font-italic mb-2">Les champs indiqués par une champs * sont obligatoires</p>
+				{% for label, messages in app.flashes %}
+					<div class="alert alert-{{ label }}">
+						{% for message in messages %}
+							{{ message|raw }}
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+
+			<form
+				class="col-10 col-xl-6" id="inscrpition-form" name="inscription-form" method="post" enctype="multipart/form-data">
+				{# luckian INPUT 1 : Artiste #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fa fa-male"></i>
+						</span>
+					</div>
+					<input type="text" id="artist" name="artist" placeholder="* Nom de l'artiste" class="form-control" value="{{ input_saisis.artist ?? '' }}" required autofocus>
+				</div>
+
+				{# luckian SELECT 1 : Genre #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fa fa-volume-up"></i>
+						</span>
+					</div>
+					<select id="genre" name="genre" class="custom-select">
+						<option value="">-- * Sélectionnez un genre musical--</option>
+						{% for genre in genres %}
+                            <option value="{{ genre.genreName }}" {{ (input_saisis.genre is defined and input_saisis.genre == genre.genreName) ? 'selected' : ''  }}>{{ genre.genreName }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				{# luckian SELECT 2 : Sous-genre #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fa fa-volume-down"></i>
+						</span>
+					</div>
+					{# Luckian : On ne peut pas rajouter un value="{{ input_saisis.description ?? '' }}" car dans option on gère déja la value sur le select #}
+					<select type="text" id="subgenre" name="subgenre" class="custom-select" disabled>
+						<option value="">-- * Sélectionnez un sous-genre --</option>
+					</select>
+				</div>
+
+				{# luckian INPUT 2 : Image #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fas fa-images"></i>
+						</span>
+					</div>
+					<div class="custom-file">
+					{# Luckian Je n'arrive pas à récupérer l'image envoyé car elle n'est pas sauvegardé je pense la value ne peux pas être récupéré #}
+						<input type="file" id="image" name="image" placeholder="Ajouter une image" class="form-control">
+					</div>
+				</div>
+
+				{# luckian INPUT 3 : Release #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw far fa-play-circle"></i>
+						</span>
+					</div>
+					<input type="text" id="release_name" name="release_name" placeholder="* Nom de la sortie" class="form-control"  value="{{ input_saisis.release_name ?? '' }}">
+				</div>
+
+				{# luckian INPUT 4 : Date #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw far fa-calendar-alt"></i>
+						</span>
+					</div>
+					<input type="date" id="release_date" name="release_date" placeholder="* Date de la sortie" class="form-control" value="{{ input_saisis.release_date ?? '' }}">
+				</div>
+
+				{# luckian SELECT 3 : Type de sortie #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fa fa-compact-disc"></i>
+						</span>
+					</div>
+					<select id="release_type" name="release_type" class="custom-select">
+						<option value=''>-- * CD, Vinyl, Digital ou Cassette</option>
+						<option value="CD">CD</option>
+						<option value="Digital">Digital</option>
+						<option value="Vinyl">Vinyl</option>
+						<option value="Cassette">Cassette</option>
+					</select>
+				</div>
+
+				{# luckian TEXTAREA 1 : Description #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fa-fw fas fa-align-left"></i>
+						</span>
+					</div>
+					<textarea type="text" id="description" name="description" class="form-control" placeholder="* Décrivez votre projet, indiquez votre playlist... bref parlez nous de vous">{{ input_saisis.description ?? '' }}</textarea>
+				</div>
+
+				{# luckian INPUT 5 : Lien Facebook #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.facebook.com/</span>
+					</div>
+
+					<input type="text" id="fb" name="fb" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.fb ?? '' }}">
+				</div>
+
+				{# luckian INPUT 6 : Lien Insta #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.instagram.com/</span>
+					</div>
+					<input type="text" id="ig" name="ig" class="form-control" value="{{ input_saisis.ig ?? '' }}">
+
+				</div>
+
+				{# luckian INPUT 7 : Lien Twitter #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.twitter.com/</span>
+					</div>
+					<input type="text" id="twitter" name="twitter" class="form-control"  value="{{ input_saisis.twitter ?? '' }}">
+				</div>
+
+				{# luckian INPUT 8 : Lien YT #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.youtube.com/watch?v=</span>
+					</div>
+					<input type="text" id="yt" name="yt" class="form-control"  value="{{ input_saisis.yt ?? '' }}">
+				</div>
+
+				{# luckianINPUT 9 : Lien SoundCloud #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.soundcloud.com/</span>
+					</div>
+					<input type="text" id="soundcloud" name="soundcloud" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.soundcloud ?? '' }}">
+				</div>
+
+				{# luckian INPUT 10 : Lien Deezer #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.deezer.com/fr/</span>
+					</div>
+					<input type="text" id="deezer" name="deezer" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.deezer ?? '' }}">
+				</div>
+
+				{# luckian INPUT 11 : Lien Réseaux #}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text font-italic">http://www.spotify.com/artist/</span>
+					</div>
+					<input type="text" id="spotify" name="spotify" class="form-control" aria-describedby="basic-addon3"  value="{{ input_saisis.spotify ?? '' }}">
+				</div>
+
+				<input type="hidden" name="_csrf_token">
+
+				<div class="p-4 text-center">
+					<button class="btn" type="submit">Envoyer</button>
+				</div>
+				<div class="status"></div>
+		</form>
+	</div>
+</main>{% endblock %}{% block js %}
+<script>
+$(document).ready(function(){
+
+    loadSubGenres();
+
+    $('#genre').change(function(){
+        loadSubGenres(); // Appel de la fonction qui charge les sous genres
+    });
+
+});
+
+
+function loadSubGenres(){
+    selectedGenre = $('#genre').val(); // Valeur du genre sélectionné
+
+    console.log(selectedGenre);
+
+    $('#subgenre').html('<option value="">-- Sélectionnez --</option>').prop('disabled', true);
+
+    //console.log(resultatJSON);
+
+    $.post('{{ path('live_subgenre_ajax') }}', {genre: selectedGenre} , function(resultatJSON){
+        // resultatJSON contient le tableau de la méthode ajaxSubGenres()
+        var optionSelectHTML = '';
+
+        $.each(resultatJSON, function(key, value) {
+            // @axel Si tout va bien, key => l'id en BDD
+            // @axel value le nom du sous genre
+            optionSelectHTML+= '<option value="'+key+'"">'+value+'</option>';
+        }); 
+
+        // @axel: fonction jquery equivalent a innerHTML
+        $('#subgenre').html(optionSelectHTML).prop('disabled', false);
+
+
+    });
+}
+
+</script>
+{% endblock %}

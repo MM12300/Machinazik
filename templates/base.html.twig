@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>
+			{% block title %}Machinazic
+			{% endblock %}
+		</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+		<link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet"> 
+		{% block css %}{% endblock %}
+	</head>
+	<body>
+			{# {% block nav %}   {% endblock %} #}
+			<header>
+				<!-- Couleur de la nav -->
+				<nav class="navbar navbar-expand-md navbar-dark">
+
+					<a href="{{ path('home') }}" class="navbar-brand">
+						<img src="{{ asset('assets/img/machinazic-logo.png') }}" alt="">
+					</a>
+					<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<!-- menu sandwich -->
+					<div class="collapse navbar-collapse" id="collapse_target">
+						<ul class="navbar-nav ml-auto custom-navbar d-flex align-items-center">
+							<li class="nav-item">
+								<a href="{{ path('actualite') }}" class="nav-link">Actualités</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('tutoriel') }}" class="nav-link">Créer votre promo</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('contact') }}" class="nav-link">Contact</a>
+							</li>
+							{% if app.user is not null %}
+								<div class="connexion d-flex flex-row justify-content-center">
+									<li class="nav-item pt-2 mb-n2 pb-2">
+										<button class="btn">
+											<a href="{{ path('user') }}">
+												<i class="fas fa-user"></i>
+												{{app.user.pseudo}}
+												: connecté
+											</a>
+										</button>
+
+									</li>
+									<li class="nav-item pt-2 mb-n2 pb-2">
+										<button class="btn">
+											<a href="{{ path('app_logout') }}">
+												<i class="fas fa-running"></i>
+												Déconnexion
+											</a>
+										</button>
+									</li>
+								</div>
+							{% else %}
+								<div class="connexion d-flex flex-row justify-content-center">
+									<li class="nav-item pt-2 mb-n2 pb-2 b">										
+											<a class="btn" href="{{ path('app_login') }}">
+												<i class="fas fa-user"></i>
+												Connexion
+											</a>
+									</li>
+									<!-- gerer le background de connexion / Inscription -->
+									<li class="nav-item pt-2 mb-n2 pb-2">
+											<a class="btn" href="{{ path('subscription_addUser') }}">
+												<i class="fas fa-registered"></i>
+												Inscription
+											</a>										
+									</li>
+								</div>
+							{% endif %}
+						</ul>
+					</div>
+				</nav>
+			</header>
+			{% for label, messages in app.flashes %}
+					<div class="alert text-center alert-{{ label }}">
+						{% for message in messages %}
+							{{ message|raw }}
+						{% endfor %}
+					</div>
+			{% endfor %}
+			{# {% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+				{{ message }}
+			{% endfor %} #}
+			{% block body %}{% endblock %}
+			{# {% block footer %} {% endblock %} #}
+			<footer>
+				<div class="footer-area">
+					<div id="pied_de_page" class="row pt-4">
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-content">
+								<div class="footer-head">
+									<div class="footer-logo">
+										<h3>
+											À PROPOS
+										</h3>
+                                        <p>
+										Passionnés de musique, nous souhaitons faciliter la gestion de la promotion en ligne et sur les réseaux sociaux pour les artistes. Pour cela nous mettons à votre disposition des formulaires simplifiés permettant de créer rapidement une page de promo originale.
+									</p>
+									</div>
+									
+								</div> 
+							</div>
+						</div>
+						<div class="cool-md-4 col-sm-4 col-xs-12  align-self-center">
+							<div class="footer-content">
+								<div class="footer-head">
+									<p class="logo-social">
+                                        <a href="https://www.facebook.com"><i class="footer_logo fab fa-facebook-square"></i></a>
+                                        <a href="https://www.twitter.com"><i class="footer_logo fab fa-instagram-square"></i></a>
+                                        <a href="https://www.instagram.com"><i class="footer_logo fab fa-twitter-square"></i></a>
+                                    </p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-content">
+								<div class="footer-head">
+									<h3>CONTACT</h3>
+									<div id ="footer_contact" class="d-flex flex-column">
+                                    <div class="footer-content d-flex flex-row pb-2"><i class="footer_logo_contact fas fa-phone-volume align-self-center"></i><p class="align-self-center">+123456789</p></div>
+										
+                                    <div class="footer-content d-flex flex-row pb-2"><i class="footer_logo_contact far fa-envelope align-self-center"></i><p class="align-self-center">contact@machinazic.fr</p></div>    
+										
+                                    <div class="footer-content d-flex flex-row"><i class="footer_logo_contact far fa-calendar-alt align-self-center"></i><p class="align-self-center">Horaires - 8:00 - 19:00</p></div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="footer-area-bottom mt-3">
+				<div class="row justify-content-center" id="copyright">
+					<div>
+						<p> &copy; 2020 - MLT Incorporated Copyright - Anthony LATOUR, Luckian OLIER, Matthieu MADEJSKI - <a class="legal font-weight-bold" href="{{ path('mentionslegales') }}">Mentions Légales</a>
+					</div>
+				</div>
+			</div>
+			</footer>
+
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+			{% block js %}
+				<!-- Fichiers JS -->
+			{% endblock %}
+		</body>
+
+	</html>

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block title %}Connexion
+{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block body %}
+	<main class="container-fluid" id="login">
+
+
+		{% for label, messages in app.flashes %}
+			<div class="alert text-center alert-{{ label }}">
+				{% for message in messages %}
+					{{ message|raw }}
+				{% endfor %}
+				{{( error ??  '')}}
+			</div>
+		{% endfor %}
+		<div class="row text-center justify-content-center">
+			<div id="login_zone" class="col-12 col-xl-4 justify-content-center px-5 pb-5 pt-2 mt-5">
+				<a href="{{ path('home') }}" class="d-inline-block">
+					<img src="{{ asset('assets/img/machinazic-logo.png') }}" alt="">
+				</a>
+				<h1>Connexion</h1>
+				<p class="connexion_p">Connectez-vous pour accéder à votre espace de création</p>
+				<form method="post">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-user"></i>
+							</span>
+						</div>
+						<input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" placeholder="Pseudo" class="form-control" required autofocus>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+						</div>
+						<input type="password" name="password" id="inputPassword" placeholder="Mot de Passe" class="form-control" required>
+					</div>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<p class="small-font"><a href="" class="sub-link text-light">Mot de passe oublié</a></br>
+					<button class="btn" type="submit">Envoyer</button>
+
+					<hr>
+					<p>Vous n'avez pas encore de compte ?
+						<br><a href="{{ path('subscription_addUser') }}" class="sub-link text-light">Cliquez ici pour vous inscrire</a>
+					</p>
+					
+					</p>
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+
+
+{% block js %}
+	<!-- Fichiers JS -->
+	<script src="{{ asset('assets/js/scripts.js') }}"></script>
+{% endblock %}

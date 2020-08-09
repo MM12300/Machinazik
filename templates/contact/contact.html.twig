@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+	<main class="container-fluid" id="contact_main">
+		{% for label, messages in app.flashes %}
+			<div class="alert text-center alert-{{ label }}">
+				{% for message in messages %}
+					{{ message|raw }}
+				{% endfor %}
+			</div>
+		{% endfor %}
+		<div class="row text-center justify-content-center">
+			<div id="login_zone" class="col-12 col-xl-4 justify-content-center px-5 pb-5 pt-2 mt-5">
+				<a href="{{ path('home') }}" class="d-inline-block">
+					<img src="{{ asset('assets/img/machinazic-logo.png') }}" alt="">
+				</a>
+				<h1>Contact</h1>
+				<p class="connexion_p">Une question ? Une suggestion ? Nous sommes à votre écoute.</p>
+				<form method="post">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-user"></i>
+							</span>
+						</div>
+						<input type="text" id="nickname" placeholder="Prénom" name="nickname" class="form-control mr-2" value="{{ input_saisis.nickname ?? '' }}">
+                        <input type="text" id="familyname" placeholder="Nom" name="familyname" class="form-control" value="{{ input_saisis.familyname ?? '' }}">
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+						</div>
+						<input type="text" id="pseudo" placeholder="Pseudo" name="pseudo" class="form-control" value="{{ input_saisis.pseudo ?? '' }}">
+					</div>
+
+                    <div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+						</div>
+						<input type="text" id="email" name="email" placeholder="email" class="form-control" value="{{ input_saisis.email ?? '' }}">
+					</div>
+
+                    <div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+						</div>
+						<input type="text" id="object" name="object" placeholder="Objet" class="form-control" value="{{ input_saisis.object ?? '' }}">
+					</div>
+
+                    <div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+						</div>
+						<textarea type="text" id="message" name="message" placeholder="Votre Message" class="form-control">{{ input_saisis.message ?? '' }}</textarea>
+					</div>
+
+
+
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class="btn" type="submit">Envoyer</button>
+					<hr>
+					<p>Vous n'avez pas encore de compte ?
+						<br><a href="{{ path('subscription_addUser') }}" class="sub-link text-light">Cliquez ici pour vous inscrire</a>
+					</p>
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+
+			{% block js %}
+				<!-- Fichiers JS -->
+				<script src="{{ asset('assets/js/scripts.js') }}"></script>
+			{% endblock %}
+
+

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machinazic - Actualités{% endblock %}
+
+{% block body %}
+    <main class="container"> 
+        <div class="m-3">
+            <h1 class="titre_home my-4 py-3 text-uppercase text-center">Les actualités de Machinazic</h1>
+            <p> Retrouvez ici les dernières sorties et évènements qui ont bénéficié des services de Machinazic pour leur promo</p>
+        </div>
+
+        <div class="row mx-3 my-4">
+            <h2 class="py-2 last col-xl-12 col-sd-12 text-center">Les Dernières Sorties</h2>
+            {% for release in releases %}
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ path('release', {release_id: release.id}) }}"><img id="image_article" src="{{asset('assets/img/uploads/' ~ release.image) }}" alt="image associée à l'article" class="img-thumbnail mx-auto rounded d-block"></a>
+                </div>
+                <div class="col-xl-8 col-sm-12 my-auto">
+                    <p> <i class="fas fa-music">&nbsp;</i> Retrouvez <span class="font-weight-bold">{{release.artist}}</span> qui présente <span class="font-italic">{{release.releaseName}} !</span></p>
+                    <p class="text-right pr-5">&nbsp;<i class="fas fa-compact-disc"></i> Sortie ({{release.releaseType}}) le {{release.dateRelease}} <a href="{{ path('release', {release_id: release.id}) }}"><i class="pl-2 fas fa-external-link-alt"></i></a></p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mx-3 my-4">
+        <h2 class="py-2 last col-xl-12 col-sd-12 text-center">Les Derniers Évènements</h2>
+            {% for live in lives %}
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ path('live', {live_id: live.id}) }}"><img id="image_article" src="{{asset('assets/img/uploads/' ~ live.image) }}" alt="image associée à l'article" class="img-thumbnail mx-auto rounded d-block"></a>
+                </div>
+                <div class="col-xl-8 col-sm-12 my-auto">
+                    <p> <i class="fas fa-music">&nbsp;</i> Retrouvez <span class="font-weight-bold">{{live.artist}}</span> qui présente <span class="font-italic">{{live.liveName}} !</span></p>
+                    <p class="text-right pr-5">&nbsp;<i class="fas fa-compact-disc"></i> Retrouvez en {{live.liveType}} le {{live.dateLive}} <a href="{{ path('live', {live_id: live.id}) }}"><i class="pl-2 fas fa-external-link-alt"></i></a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+{% endblock %}
+
+
+
+ {# <main class="container">
+     <section class="pt-4 bg-grey px-3">
+
+        <div class="pt-4 text-center">
+            <h1>Actualités</h1>
+            </div>
+            <div class="row pt-4">
+                <div class="col-12 col-xl-12 text-center">
+                    <h4>Machinazic présente : LEFA en concert</h4>
+            </div>
+        
+                <div class="pt-4 col-12 col-xl-4">
+                    <img src="{{ asset('assets/img/lefa.webp') }}" alt="" class="img-thumbnail">
+                </div>
+                <div class="col-12 col-xl-8 text-center align-self-center">
+                    <p> Etiquette genre Bar-Discothèque Le Fragonard (Grenoble)</p>
+                    <p>Artiste : Jean Guy Balnave Genre : Hard Musette </p>
+                    <p>  Date : 32/07/2020 à 20h12</p>
+                </div>
+                <div class="pt-4 col-12 col-xl-12 text-center">
+                <p> Description : Suite à la sortie de son album « Rupture de stock », unanimement spolié par la critique et
+                        atteignant déjà plus de 27 ventes (streaming inclus), Jean-Guy Balnave viendra défendre cet opus
+                        le 32 juillet sur la scène du bar-discothèque Le Fragonard à Grenoble. Farouchement engagé, cet artiste
+                        atypique et mal rasé nous fera découvrir son univers, oscillant en permanence entre poésies légères et
+                        pathologies graves non prises en charge. Jean-Guy nous fera également l'honneur de présenter quelques
+                        titres inédits, dont le surprenant « Je ne suis pas celle que vous croivez » dans lequel il incarne une brosse
+                        à dents de couleur pourpre. Energie, bonne humeur et effluves corporelles diverses vous attendent donc
+                        dès 20h12 ce soir là sur la scène du Fragonard pour un moment qui s'annonce d'ores et déjà mémorable</p>
+                </div>
+                <div class="pt-4 col-12 col-xl-12 text-center">
+                    <p class="justify-content-center"></p>
+                    <p>Hashtags : #rupturedestock #balnave #live #grenoble #hardmusette
+                        #show #concert #textes #lefragonard #billets #blablabla #weshmagueule</p>
+                </div>
+                <div class="pt-4 col-12 col-xl-6 text-center">
+                    <p class="justify-content-center"></p>
+                    <p>Vidéo Youtube <a href="#"><i class="fa fa-youtube"></i></a></p>
+                </div>
+                <div class="pt-4 col-12 col-xl-6 text-center">
+                    <p class="justify-content-center"></p>
+                    <p>Lecteur type soundcloud<i class="fa fa-soundcloud"></i>, spotify<i class="fa fa-spotify"></i>....<a href="#"></a></p>
+                </div>
+            </div>
+        </section>
+    </main> #}
+

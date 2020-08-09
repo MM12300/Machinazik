@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutoriel
+{% endblock %}
+
+{% block body %}
+	<main class="container pt-4">
+		<div class="row">
+			<div class="pt-4 col-12 col-xl-12 text-center mb-4">
+				<h2 class="titre_home  mb-4">COMMENT CA MARCHE ?
+				</h2>
+				<div class="row">
+					<div class="col-sd-12 col-xl-12">
+						<p><i class="fas fa-exclamation-triangle"></i> Vous devez vous
+							<a href="{{ path('subscription_addUser') }}">inscrire</a>
+							pour accéder à nos services.</p>
+						<p>Vous êtes un artiste sur le point de sortir un projet discographique ou de faire un concert ?
+                Vous souhaitez utiliser les réseaux sociaux sans devoir passer des heures sur votre promo?
+                Vous aimeriez partager une page d'informations personnalisée mais vous ne savez pas comment programmer ?
+                Machinazic est LA solution qu'il vous faut !
+                Laissez-vous guider par notre formulaire automatisé et générez rapidement votre page de promo, à partager ensuite sur tous vos réseaux sociaux ou vos listes de diffusion.</p>
+					</div>
+					<div class="col-sd-12 col-xl-6">
+						<a href="{{ path('live_addLive') }}">
+							<img class="imagepromo" src="{{ asset('assets/img/live.jpg') }}" alt="">
+							<p class="imagepromo-legende">Pour un concert, un festival...</p>
+						</a>
+						</div>
+					
+					<div class="col-sd-12 col-xl-6">
+						<a href="{{ path('release_addRelease') }}">
+							<img id="miror" class="imagepromo" src="{{ asset('assets/img/release3.jpg') }}" alt="">
+							<p class="imagepromo-legende">Pour la sortie de votre EP, CD...</p>
+						</a>
+					</div>
+				</div>
+			<div class="pt-4 col-12 col-xl-12 text-center">
+				<h2 class="titre_home  mb-4">TUTORIEL</h2>
+				<div class="row">
+					<div class="col-sd-12 col-xl-12">
+						<p class="tuto-text">Vous souhaitez utiliser Machinazic pour créér votre page de promo? Rien de plus simple, il vous suffira simplement de suivre ces quelques étapes.</p>
+						<h3 class="m-4 font-bold"><u>CHOIX DU FORMULAIRE</u></h3>
+						<p class="tuto-text">Vous souhaitez annoncer votre prochain <span class="font-weight-bold">concert</span>, ou tout autre <span class="font-weight-bold">évènement</span> lors duquel vous vous produirez sur scène? Choisissez le formulaire dédié aux <span class="font-weight-bold">évènements</span>. Vous désirez informer vos auditeurs de la <span class="font-weight-bold">sortie</span> de votre nouvel album, single, EP? Choisissez le formulaire dédié aux <span class="font-weight-bold">sorties discographiques</span></p>
+						<h3 class="m-4 font-bold"><u>FORMULAIRE "Évènements"</u></h3>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9312;</span> Indiquez votre nom d'<span class="font-weight-bold">artiste</span></p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9313;</span> Sélectionnez dans le premier menu déroulant le <span class="font-weight-bold">Genre Musical</span> auquel vous appartenez, puis le sous-genre dans le deuxième menu déroulant</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9314;</span> Uploadez le <span class="font-weight-bold">visuel</span> de l'évènement (cliquez sur "Parcourir" pour explorer votre ordinateur et localiser le fichier image à insérer, celui-ci devant impérativement être au format .jpg/.jpeg ou .png)</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9315;</span> Précisez le <span class="font-weight-bold">type d'évènement</span> via le menu déroulant</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9316;</span> Indiquez le <span class="font-weight-bold">nom de l'évènement</span></p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9317;</span> Inscrivez la <span class="font-weight-bold">date</span> à laquelle il aura lieu</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9318;</span> Renseignez <span class="font-weight-bold">l'adresse</span> (N° de batiment et nom de rue), la <span class="font-weight-bold">ville</span> et le <span class="font-weight-bold">code postal</span> puis cliquez sur le bouton "Valider l'adresse" (Cette action génèrera une carte avec la localisation exacte de l'adresse sur votre page de promo)</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9319;</span> Mentionnez le <span class="font-weight-bold">prix</span> de l'entrée (Si l'entrée est libre, merci de ne pas remplir ce champ)<p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9320;</span> Le champ <span class="font-weight-bold">"Description"</span> vous permet de présenter de manière plus approfondie l'évènement, profitez-en pour y fournir toutes les informations vous paraissant les plus pertinentes, pour reprendre éventuellement une partie de votre dossier de presse ou tout autre renseignement pouvant être utile à vos futurs spectateurs</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9321;</span> Le champ <span class="font-weight-bold">"Billetterie"</span> vous permettra de fournir l'URL de la boutique en ligne sur laquelle les spectateurs pourront acheter leurs places</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9322;</span> Les champs <span class="font-weight-bold">réseaux sociaux</span> (Facebook, Instagram, Twitter, Youtube, Soundcloud, Deezer et Spotify) vous permettront de copier/coller l'URL des réseaux sur lesquels vous êtes présent (Attention: Le début de ces champs étant pré-rempli, merci de ne pas l'indiquer à nouveau lors de la saisie)</p>
+<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9323;</span> Appuyez sur le bouton "Envoyer", vous avez terminé!</p>
+						<h3 class="m-4 font-bold"><u>FORMULAIRE "Sorties"</u></h3>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9312;</span> Indiquez votre <span class="font-weight-bold">nom d'artiste</span></p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9313;</span> Sélectionnez dans le 1er menu déroulant le <span class="font-weight-bold">Genre Musical</span> auquel vous appartenez, puis le <span class="font-weight-bold">sous-genre</span> dans le 2ème menu déroulant</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9314;</span> Uploadez le <span class="font-weight-bold">visuel</span> de votre projet (cliquez sur "Parcourir" pour explorer votre ordinateur et localiser le fichier image à insérer, celui-ci devant impérativement être au format .jpg/.jpeg ou .png)</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9315;</span> Indiquez le <span class="font-weight-bold">titre</span> du projet</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9316;</span> Renseignez la date de sortie</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9317;</span> Le champ "Description" vous permet de présenter de manière plus approfondie votre oeuvre, profitez-en pour y fournir toutes les informations vous paraissant les plus pertinentes, pour reprendre éventuellement une partie de votre dossier de presse ou tout autre renseignement pouvant être utile à vos futurs auditeurs</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9318;</span> Les champs <span class="font-weight-bold"> réseaux sociaux </span> (Facebook, Instagram, Twitter, Youtube, Soundcloud, Deezer et Spotify) vous permettront de copier/coller l'URL des réseaux sur lesquels vous êtes présent (Attention: Le début de ces champs étant pré-rempli, merci de ne pas l'indiquer à nouveau lors de la saisie)</p>
+						<p class="tuto-text"><span style="font-size: 150%; color: #d6071b;">&#9319;</span> Appuyez sur le bouton "Envoyer", vous avez terminé!</p>
+						<h3 class="m-4 font-bold"><u>ESPACE ADMINISTRATEUR</u></h3>
+						<p class="tuto-text">Si vous souhaitez retrouver l'ensemble des pages de promotion créées par vos soins, il vous suffira de cliquer sur l'icône située en haut de l'écran "[Votre nom d'utilisateur] : connecté". Vous accèderez alors à votre espace administrateur, au sein duquel vous pourrez ajouter, modifier ou effacer vos articles.</p>
+						<p class="tuto-text">N'hésitez pas à nous envoyer un message via la section "Contact" pour toutes questions ou suggestions.</p>
+
+					</div>
+					
+				</div>
+
+			</div>
+		</div>
+	</main>
+{% endblock %}

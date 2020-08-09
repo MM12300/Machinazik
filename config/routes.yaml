@@ -1,0 +1,133 @@
+#matthieu : SUBSCRIPTION - INSCRIPTION-----------------------------------------------------------------------------
+subscription :
+    path: /subscribe
+    controller: App\Controller\SubscriptionController::subscription
+#-----------------------------------------------------------------------------
+
+
+#-----------------------------------------------------------------------------
+subscription_addUser :
+    path: /subscribe/add
+    controller: App\Controller\SubscriptionController::addUser
+#-----------------------------------------------------------------------------
+
+
+
+#matthieu : LOG-IN - CONNEXION d'un utilisateur-----------------------------------------------------------------------------
+app_login :
+    path: /login
+    controller: App\Controller\SecurityController::login
+#-----------------------------------------------------------------------------
+
+
+#matthieu : REGISTER (ATTENTION NE SERT A RIEN)-----------------------------------------------------------------------------
+app_register :
+    path: /register
+    controller: App\Controller\RegistrationController::register
+#-----------------------------------------------------------------------------
+
+
+
+# luckian :CONTACT-----------------------------------------------------------------------------
+contact :
+    path: /contact
+    controller: App\Controller\ContactController::contact
+# -----------------------------------------------------------------------------
+
+
+
+#matthieu :HOME-----------------------------------------------------------------------------
+
+home :
+    path: /
+    controller: App\Controller\HomeController::home
+#-----------------------------------------------------------------------------
+
+
+
+#-----------------------------------------------------------------------------
+#matthieu :RELEASE
+#matthieu - Affiche un article_RELEASE en fonction de son id (dans l'url)
+release :
+    path: /release/view/{release_id}
+    controller: App\Controller\ReleaseController::viewRelease
+#matthieu - Vers le formulaire d'ajout d'article release
+release_addRelease :
+    path: /release/add
+    controller: App\Controller\ReleaseController::addRelease
+# Suppression d'une release avec confirmation
+release_delete: 
+    path: /release/delete/{release_id}
+    controller: App\Controller\ReleaseController::deleteRelease
+# Mise à jour d'une release avec confirmation
+release_update: 
+    path: /release/update/{release_id}
+    controller: App\Controller\ReleaseController::updateRelease
+#matthieu - route AJAX
+release_subgenre_ajax :
+    path: /ajax/release/subgenre
+    controller: App\Controller\ReleaseController::ajaxSubGenres
+#-----------------------------------------------------------------------------
+
+
+
+#-----------------------------------------------------------------------------
+#matthieu - LIVE
+#matthieu - Affiche un article_LIVE en fonction de son id (dans l'url)
+live :
+    path: /live/view/{live_id}
+    controller: App\Controller\LiveController::viewlive
+#matthieu - Vers le formulaire d'ajout d'article live
+live_addLive :
+    path: /live/add
+    controller: App\Controller\LiveController::addLive
+# Suppression d'un live avec confirmation
+live_delete: 
+    path: /live/delete/{live_id}
+    controller: App\Controller\LiveController::deleteLive
+# Mise à jour d'un live avec confirmation
+live_update: 
+    path: /live/update/{live_id}
+    controller: App\Controller\LiveController::updateLive
+#matthieu - route AJAX
+live_subgenre_ajax :
+    path: /ajax/live/subgenre
+    controller: App\Controller\LiveController::ajaxSubGenres
+#-----------------------------------------------------------------------------
+
+
+
+#-----------------------------------------------------------------------------
+#matthieu - Espace utilisateur
+user :
+    path: /user
+    controller: App\Controller\UserController::userSpace
+#-----------------------------------------------------------------------------
+
+
+
+#-----------------------------------------------------------------------------
+#matthieu : GENRE (attention, ce n'est pas une page "active", elle sert uniquement à générer les genres)
+genre :
+    path: /genre
+    controller: App\Controller\GenreController::addGenre
+#luckian : ACTUALITES
+actualite :
+    path: /actualite
+    controller: App\Controller\HomeController::showAll
+
+#luckian : COMMENT CA MARCHE / TUTO
+tutoriel :
+    path: /tutoriel
+    controller: App\Controller\HomeController::tutoriel
+
+#matthieu : mentions légales
+mentionslegales :
+    path: /mentionslegales
+    controller: App\Controller\HomeController::mentionslegales
+
+
+#genre
+#a ajouter: une route pour choisir entre live et release
+# a ajouter une page actualité ou je montre des exemples de pages de promotion
+#-----------------------------------------------------------------------------

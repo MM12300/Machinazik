@@ -1,0 +1,300 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un évènement{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+{% endblock %}
+
+{% block body %}
+{# LUCKIAN FORMULAIRE DE LIVE #}
+<main class="container">
+		<div class="row  justify-content-center">
+			<div class="col-10 text-center">
+				<a href="{{ path('app_login') }}" class="navbar-brand">
+					<img src="{{ asset('assets/img/') }}" alt="">
+				</a>
+				<h1 class="titre_form">Ajouter un </br>Évènement</h1>
+				<p>Indiquez tous les détails concernant <span class="font-weight-bold">l'évènement</span> que vous souhaitez promouvoir (nom d'artiste, date de la sortie...)</p>
+				<p class="font-italic mb-2">Les champs indiqués par une champs * sont obligatoires</p>
+				{% for label, messages in app.flashes %}
+					<div class="alert alert-{{ label }}">
+						{% for message in messages %}
+							{{ message|raw }}
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+			<form
+				class="col-10 col-xl-6" id="inscrpition-form" name="inscription-form" method="post" enctype="multipart/form-data">
+				{# luckian INPUT 1 : Artiste #}
+                        
+                        
+                        {# LUCKIAN INPUT 1 : Artiste #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fa fa-user"></i></span>
+                            </div>
+                            <input type="text" id="artist" name="artist" placeholder="Nom de l'artiste" class="form-control"  value="{{ input_saisis.artist ?? '' }}" required autofocus>
+                        </div>
+
+                        {# LUCKIAN SELECT 1 : Genre #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fa fa-volume-up"></i></span>
+                            </div>
+                            <select id="genre" name="genre" class="custom-select">
+                                <option value="">--* Sélectionnez un genre musical --</option>
+                                {% for genre in genres %}
+                                <option value="{{ genre.genreName }}" {{ (input_saisis.genre is defined and input_saisis.genre == genre.genreName) ? 'selected' : ''  }}>{{ genre.genreName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        {# LUCKIAN SELECT 2 : Sous-genre #}
+                         <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-volume-down"></i></span>
+                            </div>
+                            <select type="text" id="subgenre" name="subgenre" class="custom-select" disabled>
+                                <option value="">--* Sélectionnez un sous genre --</option>
+                            </select>
+                        </div>
+
+                        {# LUCKIAN INPUT 2 : Image #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-images"></i></span>
+                            </div>
+                            <div class="custom-file">
+                        {# Luckian Je n'arrive pas à récupérer l'image envoyé car elle n'est pas sauvegardé je pense la value ne peux pas être récupéré #}
+                                <input type="file" id="image" name="image" placeholder="Ajouter une image" class="form-control"  value="{{ input_saisis.image ?? '' }}">
+                            </div>
+                        </div>
+
+                        {# LUCKIAN SELECT 3 : type #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-music"></i></span>
+                            </div>
+                            <select type="text" id="live_type" name="live_type" class="custom-select" >
+                                {# <option value="">-- * Concert, Showcase, Festival, Release Party</option> #}
+                                <option value="Concert" {{ (input_saisis.liveType ?? '') == 'Concert' ? 'selected' : '' }}>Concert</option>
+                                <option value="Showcase" {{ (input_saisis.liveType ?? '') == 'Showcase' ? 'selected' : '' }}>Showcase</option>
+                                <option value="Festival" {{ (input_saisis.liveType ?? '') == 'Festival' ? 'selected' : '' }}>Festival</option>
+                                <option value="Release Party" {{ (input_saisis.liveType ?? '') == 'Release Party' ? 'selected' : '' }}>Release Party</option>
+                            </select>
+                        </div>
+            
+                        {# LUCKIAN INPUT 3 : live #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-guitar"></i></span>
+                            </div>
+                            <input type="text" id="live_name" name="live_name" placeholder="Nom du live" class="form-control"   value="{{ input_saisis.live_name ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 4 : Date #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="date" id="live_date" name="live_date" placeholder="Date du live" class="form-control"   value="{{ input_saisis.live_date ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 5 : horaire #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-clock"></i></span>
+                            </div>
+                            <input type="time" id="schedule" name="schedule" class="form-control"  value="{{ input_saisis.shedule ?? '' }}">
+                        </div>
+
+
+                        {# LUCKIAN INPUT 10 : price #}
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-money-bill-wave"></i></span>
+                            </div>
+                            <input type="price" id="price" name="price" placeholder="Prix" class="form-control"  value="{{ input_saisis.price ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN TEXTAREA 2 : Description #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-align-left"></i></span>
+                            </div>
+                            <textarea type="text" id="description" name="description" placeholder="Description" class="form-control" >{{ input_saisis.description ?? '' }}</textarea>
+                        </div>
+
+                        {# LUCKIAN INPUT 11 : ticket #}
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-ticket-alt"></i></span>
+                            </div>
+                            
+                            <input type="text" id="ticket" name="ticket" class="form-control" placeholder="https://www.digitick.com/..." aria-describedby="basic-addon3"  value="{{ input_saisis.ticket ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 12 : Lien Facebook #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.facebook.com/</span>
+                            </div>
+                            
+                            <input type="text" id="fb" name="fb" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.fb ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 13 : Lien Insta #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.instagram.com/</span>
+                            </div>
+                            <input type="text" id="ig" name="ig" class="form-control" value="{{ input_saisis.ig ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 14 : Lien Twitter #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.twitter.com/</span>
+                            </div>
+                            <input type="text" id="twitter" name="twitter" class="form-control"  value="{{ input_saisis.twitter ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 15 : Lien YT #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.youtube.com/fr/watch?v=</span>
+                            </div>
+                            <input type="text" id="yt" name="yt" class="form-control"  value="{{  safe.youtube ?? live.youtube ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 16 : Lien SoundCloud #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.soundcloud.com/</span>
+                            </div>
+                            <input type="text" id="soundcloud" name="soundcloud" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.soundcloud ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 17 : Lien Deezer #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.deezer.com/fr/</span>
+                            </div>
+                            <input type="text" id="deezer" name="deezer" class="form-control" aria-describedby="basic-addon3" value="{{ input_saisis.deezer ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 18 : Lien spotify #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text  font-italic">http://www.spotify.com/embed/artist/</span>
+                            </div>
+                            <input type="text" id="spotify" name="spotify" class="form-control" aria-describedby="basic-addon3"  value="{{ input_saisis.spotify ?? '' }}">
+                        </div>
+                        {# LUCKIAN INPUT 5 : Adresse #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-map-marked-alt"></i></span>
+                            </div>
+                            <input type="text" id="address" name="address" placeholder="Indiquez l'adresse" class="form-control"   value="{{ input_saisis.address ?? '' }}">
+                        </div>
+                        
+
+                        {# LUCKIAN INPUT 7 : Postcode #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-map-pin"></i></span>
+                            </div>
+                            <input type="text" id="postcode" name="postcode" placeholder="Indiquez le code postal" class="form-control"   value="{{ input_saisis.postcode ?? '' }}">
+                        </div>
+
+                        {# LUCKIAN INPUT 6 : Ville #}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-fw fas fa-city"></i></span>
+                            </div>
+                            <input type="text" id="ville" name="ville" placeholder="Indiquez la ville" class="form-control"   value="{{ input_saisis.ville ?? '' }}">
+                        </div>
+
+                        <div class="pt-4 text-center">
+                            <button name="button" class="btn" id="searchAddr">
+                                Vérifier l'adresse
+                            </button>
+                        </div>
+
+                        <div class="d-none" id="detailsMap"></div>
+
+                        {# LUCKIAN INPUT 8 : Latitude #}
+                        <div class="input-group mb-3">
+                            
+                            <input type="hidden" id="latitude" name="latitude" placeholder="Latitude" class="form-control"   value="{{ input_saisis.latitude ?? '' }}" readonly>
+                        </div>
+                         {# LUCKIAN INPUT 9 : Longitude #}
+                        <div class="input-group mb-3">
+                            
+                            <input type="hidden" id="longitude" name="longitude" placeholder="Longitude" class="form-control"   value="{{ input_saisis.longitude ?? '' }}" readonly>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token">
+
+                        <div class="pt-4 text-center">
+                            <button class="btn" type="submit">Envoyer</button>
+                        </div>
+                        <div class="status"></div>
+        </form>
+    </div>
+</main>
+
+
+
+{% endblock %}
+
+{% block js %}
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+<script src="{{ asset('assets/js/scripts.js') }}"></script>
+<script>
+ $(document).ready(function(){
+
+    loadSubGenres();
+
+    $('#genre').change(function(){
+        loadSubGenres(); // Appel de la fonction qui charge les sous genres
+    });
+
+});
+
+
+function loadSubGenres(){
+    selectedGenre = $('#genre').val(); // Valeur du genre sélectionné
+
+    console.log(selectedGenre);
+
+    $('#subgenre').html('<option value="">-- Sélectionnez --</option>').prop('disabled', true);
+
+    //console.log(resultatJSON);
+
+    $.post('{{ path('live_subgenre_ajax') }}', {genre: selectedGenre} , function(resultatJSON){
+        // resultatJSON contient le tableau de la méthode ajaxSubGenres()
+        var optionSelectHTML = '';
+
+        $.each(resultatJSON, function(key, value) {
+            // @axel Si tout va bien, key => l'id en BDD
+            // @axel value le nom du sous genre
+            optionSelectHTML+= '<option value="'+key+'"">'+value+'</option>';
+        }); 
+
+        // @axel: fonction jquery equivalent a innerHTML
+        $('#subgenre').html(optionSelectHTML).prop('disabled', false);
+
+
+    });
+}
+
+</script>
+{% endblock %}

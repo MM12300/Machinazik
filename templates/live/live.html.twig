@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machinazik - évènements {{live.id}}
+{% endblock %}
+{% block css %}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+{% endblock %}
+{% block body %}
+
+
+<main class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 text-center">
+				<h1 class="titre_article">Machinazic présente :</h1>
+				<h2 id="who">
+					<span class="font-italic">{{live.artist}}</span> en {{live.liveType}}, présente
+					<span class="font-weight-bold">{{ live.liveName}}</span>
+				</h2>
+			</div>
+            <div class="col-xl-6"><img id="image_article" src="{{asset('assets/img/uploads/' ~ live.image) }}" alt="image associée à l'article" class="img-thumbnail rounded mx-auto d-block"></div>
+
+                <div class="col-xl-3 text-center align-self-center">
+                <div id="summary">
+					<p>
+						<span class="font-weight-bold">Genre :</span>
+						{{ live.genre }}</p>
+					<p>
+						<span class="font-weight-bold">Sous-genre :</span>
+						{{ live.subgenre }}
+					</p>
+					<p>
+						{{ live.liveType }}
+					</p>
+					<div class="border-top w-80 align-self-center my-2"></div>
+					{% if live.ville is not null %}
+					<p>
+						<span class="font-weight-bold">Lieu : </span>
+						{{ live.ville }}
+					</p>
+					{% endif %}
+					<p>
+						<span class="font-weight-bold">Date : </span>
+						{{ live.dateLive }}
+					</p>
+					<p>
+						<span class="font-weight-bold">Horaire : </span>
+						{{ live.schedule }}
+					</p>
+					<p>
+						<span class="font-weight-bold">Prix : </span>
+						{{ live.price }}€
+					</p>
+                    </div>
+				</div>
+			<div class="col-12 col-xl-12 text-center mt-5">
+				<p class="justify-content-center"></p>
+				<p class="mb-4"><span  id="apropos">Découvrez <i class="fas fa-headphones-alt"></i>&nbsp;"{{live.artist}}"&nbsp;<i class="fas fa-headphones-alt"></i></span></p>
+				<p class="m-3 text-justify">
+										{{ live.description }}
+				</p>
+				<div class="text-right pr-5">
+				{% if live.ticket is not null %}
+				<a class="btn" href="{{live.ticket}}">Billetterie</a>
+				{% endif %}
+				</div>
+				<div id="keywords">
+					<p class="font-weight-bold"><i class="fas fa-hashtag"></i> Mots-clefs :</p>
+					<p>#Machinazic #Musique #Music #Musicpromo #Live #Show #{{live.liveType}} #{{live.genre}} #{{live.subgenre}} #{{live.artist}} #Promo </p>
+				</div>
+
+				{# API #}
+				<div class="col-12 col-xl-12 text-center mt-5 no-view-mobile">
+					{% if live.youtube is not null %}
+						<iframe class="m-2" width="560" height="315" src="https://www.youtube.com/embed/{{live.youtube}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					{% endif %}	
+					{% if live.spotify is not null %}
+						<iframe class="m-2" src="https://open.spotify.com/embed/artist/{{live.spotify}}" width="650" height="380" frameborder="0" allowtransparency="true"></iframe>
+					{% endif %}	
+				</div>
+
+
+				{# SOCIAL #}
+				<div class="d-flex flex-row justify-content-center">
+					{% if live.facebook is not null %}
+						<div class="p-4">
+							<a href="https://www.facebook.com/{{live.facebook}}">
+								<img class="logo" src="{{ asset('assets/img/logos/facebook2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if live.instagram is not null %}
+						<div class="p-4">
+							<a href="https://www.instagram.com/{{live.instagram}}">
+								<img class="logo" src="{{ asset('assets/img/logos/instagram.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if live.twitter is not null %}
+						<div class="p-4">
+							<a href="https://www.twitter.com/{{live.twitter}}">
+								<img class="logo" src="{{ asset('assets/img/logos/twitter2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+				</div>
+
+				{# MUSIQUE #}
+				<div class="d-flex flex-row justify-content-center">
+					
+					{% if live.youtube is not null %}
+						<div class="p-4">
+							<a href="https://www.youtube.com/watch?v={{live.youtube}}">
+								<img class="logo" src="{{ asset('assets/img/logos/youtube1.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}	
+
+					{% if live.soundcloud is not null %}
+						<div class="p-4">
+							<a href="https://www.soundcloud.com/{{live.soundcloud}}">
+								<img class="logo" src="{{ asset('assets/img/logos/soundcloud2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}	
+				</div>
+				<div class="d-flex flex-row justify-content-center">
+					{% if live.deezer is not null %}
+						<div class="p-4">
+							<a href="https://www.deezer.com/{{live.deezer}}">
+								<img class="logo" src="{{ asset('assets/img/logos/deezer2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}
+
+					{% if live.spotify is not null %}
+						<div class="p-4">
+							<a href="https://www.spotify.com/{{live.spotify}}">
+								<img class="logo" src="{{ asset('assets/img/logos/spotify2.png') }}" alt="">
+							</a>
+						</div>
+					{% endif %}				
+				</div>
+				<div>
+					<a href="https://www.facebook.com/share.php?u=https://www.discogs.com/"><i class="fab fa-facebook-square"></i>&nbsp;Partager sur Facebook</a>
+				</div>
+			</div>
+		</div>
+
+		{% if live.address is not null %}
+
+		<div class="pt-4 pb-4 col-12">
+			<h2 class="pb-4 text-center">Retrouvez votre évènement : </h2>
+			<div id="detailsMap" class="img-thumbnail rounded mx-auto d-block"></div>
+		{% endif %}
+
+		<div class="d-flex justify-content-end" >
+			<p class="font-italic mt-3 pr-4">Article crée le
+				{{ live.dateCreated|date("m/d/Y") }}</p>
+		</div>
+
+	</main>
+	
+		{% endblock %}
+		{% block js %}
+        {# Block js pour récupérer les coordonnées préalablement ajouter en bdd #}
+			<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+			<script>
+				let mymap // Variable qui permettra de stocker la carte
+let latitude = {{ live.latitude }};
+let longitude = {{ live.longitude }};
+
+
+// On attend que le DOM soit chargé
+window.onload = () => { // Nous initialisons la carte et nous la centrons sur Paris
+mymap = L.map('detailsMap').setView([
+latitude, longitude
+], 11)
+marker = L.marker([latitude, longitude]).addTo(mymap);
+marker.bindPopup("<b>Retrouvez l'évènement à cette location !</b>").openPopup();
+L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { // Lien vers la source des données
+attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+minZoom: 1,
+maxZoom: 20
+}).addTo(mymap)
+}
+			</script>
+		{% endblock %}
